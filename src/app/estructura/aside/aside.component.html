@@ -1,0 +1,143 @@
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link">
+      <img src="../../../assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light"><b>Software Licorera.</b>  </span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="../../../assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block"> <b>{{nombre}}</b></a>
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+          <li class="nav-item" *ngIf="rol!='prueba'">
+            <a [routerLink]="['/dashboard']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                dashboard
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'&& rol!='bodeguero'">
+            <a [routerLink]="['/categoria']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Categoria
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'&& rol!='bodeguero'">
+            <a [routerLink]="['/ciudad']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Ciudad
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='bodeguero'">
+            <a [routerLink]="['/cliente']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Cliente
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'&& rol!='bodeguero'">
+            <a [routerLink]="['/departamento']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Departamento
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'">
+            <a [routerLink]="['/devoluciones']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Devoluciones
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='bodeguero'">
+            <a [routerLink]="['/pago']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Pago
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='bodeguero'">
+            <a [routerLink]="['/pedidos']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Pedidos
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a [routerLink]="['/productos']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Productos
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'">
+            <a [routerLink]="['/proveedor']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Proveedor
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'">
+            <a [routerLink]="['/reabastecimiento']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Reabastecimiento
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'&& rol!='bodeguero'">
+            <a [routerLink]="['/tipo_usuario']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Tipo de usuario
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='cajero'&& rol!='bodeguero'">
+            <a [routerLink]="['/usuario']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Usuario
+              </p>
+            </a>
+          </li>
+          <li class="nav-item" *ngIf="rol!='bodeguero'">
+            <a [routerLink]="['/ventas']" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Ventas
+              </p>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>

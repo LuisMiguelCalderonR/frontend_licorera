@@ -1,0 +1,136 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Ventas</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" style="font-style:oblique;font-weight: bold; font-size: small;">Home</a></li>
+            <li class="breadcrumb-item active" style="font-style:oblique;font-weight: bold; font-size: small;">Ventas</li>
+            </ol>
+        </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+    <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="container-fluid">
+<!-- contenido -->
+                <hr>
+                <input type="button" style="font-style: oblique;font-weight: bold; font-size: small;" value="Insertar Venta." class="btn btn-warning" (click)="mostrar_form('ver')">
+                <hr>
+<!-- Formulario -->
+                <div id="formulario" *ngIf="mform==true">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Fecha" [(ngModel)]="obj_ventas.fecha">
+                            <span style="color: red;" *ngIf="validar_fecha == false">Insertar Fecha.</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Numero Factura" [(ngModel)]="obj_ventas.numero_factura">
+                            <span style="color: red;" *ngIf="validar_numero_factura == false">Insertar Numero Factura.</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Cantidad" [(ngModel)]="obj_ventas.cantidad">
+                            <span style="color: red;" *ngIf="validar_cantidad == false">Insertar Cantidad.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Total" [(ngModel)]="obj_ventas.total">
+                            <span style="color: red;" *ngIf="validar_total == false">Insertar Total.</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <select class="form-control form-select"[(ngModel)]="obj_ventas.fo_usuario">
+                                <option value="0" label="Seleccione Usuario." selected= "selected">Seleccione Usuario.</option>
+                                <option *ngFor="let item_usuario of usuario" value="{{item_usuario.id_usuario}}">{{item_usuario.nombre_usuario}}</option>
+                                <span style="color: red;" *ngIf="validar_usuario== false">Seleccionar Usuario.</span>
+                            </select>
+    
+                        </div>
+                        <div class="col-lg-4">
+                            <select class="form-control form-select"[(ngModel)]="obj_ventas.fo_cliente">
+                                <option value="0" label="Seleccione Cliente." selected= "selected">Seleccione Cliente.</option>
+                                <option *ngFor="let item_cliente of cliente" value="{{item_cliente.id_cliente}}">{{item_cliente.nombre}}</option>
+                                <span style="color: red;" *ngIf="validar_cliente== false">Seleccionar Cliente.</span>
+                            </select>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <select class="form-control form-select"[(ngModel)]="obj_ventas.fo_productos">
+                                <option value="0" label="Seleccione Productos." selected= "selected">Seleccione Productos.</option>
+                                <option *ngFor="let item_productos of productos" value="{{item_productos.id_productos}}">{{item_productos.nombre}}</option>
+                                <span style="color: red;" *ngIf="validar_productos== false">Seleccionar Productos.</span>
+                            </select>
+                        </div>
+                        <div class="col-lg-4">
+<!-- Botones Formulario -->
+    <!-- Guardar --->
+                            <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form == false">
+    <!-- Editar ---->                        
+                            <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form == true">
+                        </div>
+                        <div class="col-lg-4">
+    <!-- Cancelar -->                            
+                            <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostrar_form('no ver')">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+<!-- Tabla -->
+                <div id="tabla">
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>N.Factura</th>
+                                        <th>Codigo</th>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Und</th>
+                                        <th>Total</th>
+                                        <th>Cliente</th>
+                                        <th>N.Contacto</th>
+                                        <th>Cajero</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    <tr *ngFor="let item of ventas">
+                                        <td>{{item.fecha}}</td>
+                                        <td>{{item.numero_factura}}</td>
+                                        <td>{{item.codigo}}</td>
+                                        <td>{{item.producto}}</td>
+                                        <td>{{item.cantidad}}</td>
+                                        <td>{{item.precio | currency}}</td>
+                                        <td>{{item.total | currency}}</td>
+                                        <td>{{item.cliente}}</td>
+                                        <td>{{item.contacto}}</td>
+                                        <td>{{item.cajero}}</td>
+                                        <td>
+<!-- Botones Tabla  ------------------->
+    <!-- Editar -------------------->
+                                            <span class="fas fa-edit" style="color: blue ; cursor: pointer;" title="Editar" (click)="cargar_datos(item, item.id_ventas)"></span>
+    <!-- Eliminar ------------------>
+                                            <span class="fas fa-minus-square" style="color: red ; cursor: pointer;" title="Eliminar" (click)="eliminar(item.id_ventas)"></span>
+                                        </td>
+                                    </tr>
+                                </table>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    
+    </div>
+</section>

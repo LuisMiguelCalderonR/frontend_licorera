@@ -1,0 +1,137 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Reabastecimiento</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item" style="font-style:oblique;font-weight: bold; font-size: small;"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active" style="font-style:oblique;font-weight: bold; font-size: small;">Reabastecimiento</li>
+            </ol>
+        </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+    <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="container-fluid">
+<!-- contenido -->
+                <hr>
+                <input type="button" style="font-style: oblique;font-weight: bold; font-size: small;" value="Insertar Reabastecimiento." class="btn btn-warning" (click)="mostrar_form('ver')">
+                <hr>
+<!-- Formulario -->
+                <div id="formulario" *ngIf="mform==true">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Fecha" [(ngModel)]="obj_reabastecimiento.fecha">
+                            <span style="color: red;" *ngIf="validar_fecha== false">Insertar Fecha.</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Orden Compra" [(ngModel)]="obj_reabastecimiento.orden_compra">
+                            <span style="color: red;" *ngIf="validar_orden_compra== false">Insertar Orden Compra.</span>
+                        </div>
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Cantidad Comprada" [(ngModel)]="obj_reabastecimiento.cantidad_comprada">
+                            <span style="color: red;" *ngIf="validar_cantidad_comprada== false">Insertar Cantidad Comprada.</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <input type="text" class="form-control" placeholder="Precio Total" [(ngModel)]="obj_reabastecimiento.precio_total">
+                            <span style="color: red;" *ngIf="validar_precio_total== false">Insertar Precio Total.</span>
+        
+                        </div>
+                        <div class="col-lg-4">
+                            <select class="form-control form-select"[(ngModel)]="obj_reabastecimiento.fo_producto">
+                                <option value="0" label="Seleccione Producto." selected= "selected">Seleccione Producto.</option>
+                                <option *ngFor="let item_productos of productos" value="{{item_productos.id_productos}}">{{item_productos.nombre}}</option>
+                                <span style="color: red;" *ngIf="validar_producto== false">Seleccionar Producto.</span>
+                            </select>
+        
+                        </div>
+                        <div class="col-lg-4">
+                            <select class="form-control form-select"[(ngModel)]="obj_reabastecimiento.fo_usuario">
+                                <option value="0" label="Seleccione Usuario." selected= "selected">Seleccione Usuario.</option>
+                                <option *ngFor="let item_usuario of usuario" value="{{item_usuario.id_usuario}}">{{item_usuario.nombre_usuario}}</option>
+                                <span style="color: red;" *ngIf="validar_usuario== false">Seleccionar Usuario.</span>
+                            </select>
+        
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <select class="form-control form-select"[(ngModel)]="obj_reabastecimiento.fo_proveedor">
+                                <option value="0" label="Seleccione Proveedor." selected= "selected">Seleccione Proveedor.</option>
+                                <option *ngFor="let item_proveedor of proveedor" value="{{item_proveedor.id_proveedor}}">{{item_proveedor.nombre}}</option>
+                                <span style="color: red;" *ngIf="validar_proveedor== false">Seleccionar Proveedor.</span>
+                            </select>
+                        </div>
+                        <div class="col-lg-4">
+<!-- Botones Formulario -->
+    <!-- Guardar --->
+                            <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form == false">
+    <!-- Editar ---->                        
+                            <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form == true">
+
+                        </div>
+                        <div class="col-lg-4">
+    <!-- Cancelar -->
+                            <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostrar_form('no ver')">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+<!-- Tabla -->
+                <div id="tabla">
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>N.Orden</th>
+                                        <th>Codigo</th>
+                                        <th>Producto</th>
+                                        <th>Cantidad</th>
+                                        <th>Precio Und</th>
+                                        <th>Total</th>
+                                        <th>Bodeguero</th>
+                                        <th>Proveedor</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    <tr *ngFor="let item of reabastecimiento">
+                                        <td>{{item.fecha}}</td>
+                                        <td>{{item.orden_compra}}</td>
+                                        <td>{{item.codigo}}</td>
+                                        <td>{{item.producto}}</td>
+                                        <td>{{item.cantidad_comprada}}</td>
+                                        <td>{{item.precio | currency}}</td>
+                                        <td>{{item.precio_total | currency}}</td>
+                                        <td>{{item.bodeguero}}</td>
+                                        <td>{{item.proveedor}}</td>
+                                        <td>
+<!-- Botones Tabla  ------------------->
+    <!-- Editar -------------------->
+                                            <span class="fas fa-edit" style="color: blue ; cursor: pointer;" title="Editar" (click)="cargar_datos(item, item.id_reabastecimiento)"></span>
+    <!-- Eliminar ------------------>
+                                            <span class="fas fa-minus-square" style="color: red ; cursor: pointer;" title="Eliminar" (click)="eliminar(item.id_reabastecimiento)"></span>
+                                        </td>
+                                    </tr>
+                                </table>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    
+    </div>
+</section>

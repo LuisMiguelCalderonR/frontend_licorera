@@ -1,0 +1,117 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Proveedor</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" style="font-style:oblique;font-weight: bold; font-size: small;">Home</a></li>
+            <li class="breadcrumb-item active" style="font-style:oblique;font-weight: bold; font-size: small;">Proveedor</li>
+            </ol>
+        </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+    <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="container-fluid">
+<!-- contenido -->
+                <hr>
+                <input type="button" style="font-style: oblique;font-weight: bold; font-size: small;" value="Insertar Proveedor." class="btn btn-warning"(click)="mostrar_form('ver')">
+                <hr>
+<!-- Formulario -->
+                <div id="formulario"  *ngIf="mform==true">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" placeholder="Nombre" [(ngModel)]="obj_proveedor.nombre">
+                            <span style="color: red;" *ngIf="validar_nombre == false">Insertar Nombre.</span>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" placeholder="Nit" [(ngModel)]="obj_proveedor.nit">
+                            <span style="color: red;" *ngIf="validar_nit == false">Insertar Nit.</span>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" placeholder="Contacto" [(ngModel)]="obj_proveedor.contacto">
+                            <span style="color: red;" *ngIf="validar_contacto == false">Insertar Contacto.</span>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" placeholder="Direccion" [(ngModel)]="obj_proveedor.direccion">
+                            <span style="color: red;" *ngIf="validar_direccion == false">Insertar Direccion</span>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <select class="form-control form-select"[(ngModel)]="obj_proveedor.fo_ciudad">
+                                <option value="0" label="Seleccione Ciudad." selected= "selected">Seleccione Ciudad.</option>
+                                <option *ngFor="let item_ciudad of ciudad" value="{{item_ciudad.id_ciudad}}">{{item_ciudad.nombre}}</option>
+                                <span style="color: red;" *ngIf="validar_ciudad== false">Seleccionar ciudad.</span>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+                            <select class="form-control form-select"[(ngModel)]="obj_proveedor.fo_dpto">
+                                <option value="0" label="Seleccione Departamento." selected= "selected">Seleccione Departamento.</option>
+                                <option *ngFor="let item_dpto of departamento" value="{{item_dpto.id_dpto}}">{{item_dpto.nombre}}</option>
+                                <span style="color: red;" *ngIf="validar_dpto== false">Seleccionar Departamento.</span>
+                            </select>
+                        </div>
+                        <div class="col-lg-3">
+<!-- Botones Formulario -->
+    <!-- Guardar --->
+                            <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form == false">
+    <!-- Editar ---->
+                            <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form == true">
+                        </div>
+                        <div class="col-lg-3">
+    <!-- Cancelar -->
+                            <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostrar_form('no ver')">
+                        </div>
+                    </div>
+                </div>
+                <hr>
+<!-- Tabla -->
+                <div id="tabla">
+                    <div class="row">
+                        <div class="col-lg-1"></div>
+                        <div class="col-lg-10">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Nit</th>
+                                        <th>N.Contacto</th>
+                                        <th>Direccion</th>
+                                        <th>ciudad</th>
+                                        <th>Departamento</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    <tr *ngFor="let item of proveedor">
+                                        <td>{{item.nombre}}</td>
+                                        <td>{{item.nit}}</td>
+                                        <td>{{item.contacto}}</td>
+                                        <td>{{item.direccion}}</td>
+                                        <td>{{item.ciudad}}</td>
+                                        <td>{{item.departamento}}</td>
+                                        <td>
+<!-- Botones Tabla  ------------------->
+    <!-- Editar -------------------->
+                                            <span class="fas fa-edit" style="color: blue ; cursor: pointer;" title="Editar" (click)="cargar_datos(item, item.id_proveedor)"></span>
+    <!-- Eliminar ------------------>
+                                            <span class="fas fa-minus-square" style="color: red ; cursor: pointer;" title="Eliminar" (click)="eliminar(item.id_proveedor)"></span>
+                                        </td>
+                                    </tr>
+                                </table>    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+    
+    </div>
+</section>

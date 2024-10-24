@@ -1,0 +1,15 @@
+<div id="login" class="row">
+  <div class="col-lg-3">
+    <div id="form" class="form-login">
+      <img src="../../../assets/dist/img/AdminLTELogo.png" width="50%" alt="Logo">
+      <div id="datos">
+        <input type="email" id="correo" placeholder="Correo" class="form-control" [(ngModel)]="correo">
+        <input type="password" id="clave" placeholder="Clave" class="form-control" [(ngModel)]="clave">
+        <div class="error-message" *ngIf="error==true">
+          <span>Email o Contraseña Incorrecta</span><br>
+        </div>
+        <input type="button" class="btn btn-sm btn-primary" value="INICIAR SESIÓN" (click)="consulta('')">
+      </div>
+    </div>
+  </div>
+</div>

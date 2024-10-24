@@ -1,0 +1,124 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Devoluciones</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#" style="font-style:oblique;font-weight: bold; font-size: small;">Home</a></li>
+            <li class="breadcrumb-item active" style="font-style:oblique;font-weight: bold; font-size: small;">Devoluciones</li>
+            </ol>
+        </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+    <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="container-fluid">
+<!-- contenido -->
+                    <hr>
+                    <input type="button" style="font-style: oblique;font-weight: bold; font-size: small;" value="Insertar Devolucion." class="btn btn-warning" (click)="mostrar_form('ver')">
+                    <hr>
+<!-- Formulario -->
+                    <div id="formulario" *ngIf="mform==true">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Fecha" [(ngModel)]="obj_devoluciones.fecha_recoleccion">
+                                <span style="color: red;" *ngIf="validar_fecha_recoleccion== false">Insertar Fecha.</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Orden" [(ngModel)]="obj_devoluciones.orden_devolucion">
+                                <span style="color: red;" *ngIf="validar_orden_devolucion== false">Insertar Orden.</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Cantidad" [(ngModel)]="obj_devoluciones.cantidad">
+                                <span style="color: red;" *ngIf="validar_cantidad== false">Insertar Cantidad.</span>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Total" [(ngModel)]="obj_devoluciones.total">
+                                <span style="color: red;" *ngIf="validar_total== false">Insertar Total.</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control form-select"[(ngModel)]="obj_devoluciones.fo_productos">
+                                    <option value="0" label="Seleccione Producto." selected= "selected">Seleccione Producto.</option>
+                                    <option *ngFor="let item_productos of productos" value="{{item_productos.id_productos}}">{{item_productos.nombre}}</option>
+                                    <span style="color: red;" *ngIf="validar_productos== false">Seleccionar categoria.</span>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control form-select"[(ngModel)]="obj_devoluciones.fo_proveedor">
+                                    <option value="0" label="Seleccione Proveedor." selected= "selected">Seleccione Proveedor.</option>
+                                    <option *ngFor="let item_proveedor of proveedor" value="{{item_proveedor.id_proveedor}}">{{item_proveedor.nombre}}</option>
+                                    <span style="color: red;" *ngIf="validar_proveedor== false">Seleccionar Proveedor.</span>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-6">
+<!-- Botones Formulario -->
+    <!-- Guardar --->
+                                <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form == false">
+                                <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form == true">
+                            </div>
+    <!-- Editar ---->
+                            <div class="col-lg-6">
+                                <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostrar_form('no ver')">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+<!-- Tabla -->
+                    <div id="tabla">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Fecha de recoleccion</th>
+                                            <th>N.Orden</th>
+                                            <th>Cantidad</th>
+                                            <th>Nombre</th>
+                                            <th>Precio Und</th>
+                                            <th>Total</th>
+                                            <th>Proveedor</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                        <tr *ngFor="let item of devoluciones">
+                                            <td>{{item.fecha_recoleccion}}</td>
+                                            <td>{{item.orden_devolucion}}</td>
+                                            <td>{{item.cantidad}}</td>
+                                            <td>{{item.nombre}}</td>
+                                            <td>{{item.precio | currency}}</td>
+                                            <td>{{item.total | currency}}</td>
+                                            <td>{{item.proveedor}}</td>
+                                            <td>
+<!-- Botones Tabla  ------------------->
+    <!-- Editar -------------------->
+                                                <span class="fas fa-edit" style="color: blue ; cursor: pointer;" title="Editar" (click)="cargar_datos(item, item.id_devoluciones)"></span>
+    <!-- Eliminar ------------------>
+                                                <span class="fas fa-minus-square" style="color: red ; cursor: pointer;" title="Eliminar" (click)="eliminar(item.id_devoluciones)"></span>
+                                            </td>
+                                        </tr>
+                                    </table>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+        
+        </div>
+    
+    </div>
+</section>

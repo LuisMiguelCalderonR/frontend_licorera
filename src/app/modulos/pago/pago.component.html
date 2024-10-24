@@ -1,0 +1,121 @@
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1 class="m-0">Pago</h1>
+        </div><!-- /.col -->
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#"style="font-style:oblique;font-weight: bold; font-size: small;">Home</a></li>
+            <li class="breadcrumb-item active"style="font-style:oblique;font-weight: bold; font-size: small;">Pago</li>
+            </ol>
+        </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+    <!-- /.content-header -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="container-fluid">
+<!-- contenido -->
+                    <hr>
+                    <input type="button" style="font-style: oblique;font-weight: bold; font-size: small;" value="Insertar Pago." class="btn btn-warning" (click)="mostrar_form('ver')">
+                    <hr>
+<!-- Formulario -->
+                    <div id="formulario" *ngIf="mform==true">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <input type="text" class="form-control" placeholder="Medio Pago" [(ngModel)]="obj_pago.medio_pago">
+                                <span style="color: red;" *ngIf="validar_medio_pago == false">Insertar Medio de Pago.</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control form-select"[(ngModel)]="obj_pago.fo_ventas">
+                                    <option value="0" label="Seleccione Venta." selected= "selected">Seleccione Venta.</option>
+                                    <option *ngFor="let item_ventas of ventas" value="{{item_ventas.id_ventas}}">{{item_ventas.numero_factura}}</option>
+                                    <span style="color: red;" *ngIf="validar_ventas== false">Seleccionar Venta.</span>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <select class="form-control form-select"[(ngModel)]="obj_pago.fo_cliente">
+                                    <option value="0" label="Seleccione Cliente." selected= "selected">Seleccione Cliente.</option>
+                                    <option *ngFor="let item_cliente of cliente" value="{{item_cliente.id_cliente}}">{{item_cliente.nombre}}</option>
+                                    <span style="color: red;" *ngIf="validar_cliente== false">Seleccionar categoria.</span>
+                                </select>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <select class="form-control form-select"[(ngModel)]="obj_pago.fo_usuario">
+                                    <option value="0" label="Seleccione Usuario." selected= "selected">Seleccione Usuario.</option>
+                                    <option *ngFor="let item_usuario of usuario" value="{{item_usuario.id_usuario}}">{{item_usuario.nombre_usuario}}</option>
+                                    <span style="color: red;" *ngIf="validar_usuario== false">Seleccionar Usuario.</span>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+<!-- Botones Formulario -->
+    <!-- Guardar --->
+                                <input type="button" value="Guardar" class="btn btn-primary" style="width: 100%;" (click)="validar('guardar')" *ngIf="botones_form == false">
+    <!-- Editar ---->
+                                <input type="button" value="Editar" class="btn btn-primary" style="width: 100%;" (click)="validar('editar')" *ngIf="botones_form == true">
+                            </div>
+                            <div class="col-lg-4">
+    <!-- Cancelar -->
+                                <input type="button" value="Cancelar" class="btn btn-secondary" style="width: 100%;" (click)="mostrar_form('no ver')">
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+<!-- Tabla -->
+                    <div id="tabla">
+                        <div class="row">
+                            <div class="col-lg-1"></div>
+                            <div class="col-lg-10">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <th>Fecha de pago</th>
+                                            <th>Medio de pago</th>
+                                            <th>N.Factura</th>
+                                            <th>Total</th>
+                                            <th>Cliente</th>
+                                            <th>N. Identificacion</th>
+                                            <th>N. Contacto</th>
+                                            <th>Correo</th>
+                                            <th>Vendedor</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                        <tr *ngFor="let item of pago">
+                                            <td>{{item.fecha}}</td>
+                                            <td>{{item.medio_pago	}}</td>
+                                            <td>{{item.factura}}</td>
+                                            <td>{{item.total | currency}}</td>
+                                            <td>{{item.cliente}}</td>
+                                            <td>{{item.identificacion}}</td>
+                                            <td>{{item.contacto}}</td>
+                                            <td>{{item.correo}}</td>
+                                            <td>{{item.vendedor}}</td>
+                                            <td>
+<!-- Botones Tabla  ------------------->
+    <!-- Editar -------------------->
+                                                <span class="fas fa-edit" style="color: blue ; cursor: pointer;" title="Editar" (click)="cargar_datos(item, item.id_pago)"></span>
+    <!-- Eliminar ------------------>
+                                                <span class="fas fa-minus-square" style="color: red ; cursor: pointer;" title="Eliminar" (click)="eliminar(item.id_pago)"></span>
+                                            </td>
+                                        </tr>
+                                    </table>    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+        
+        </div>
+    
+    </div>
+</section>
